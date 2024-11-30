@@ -16,7 +16,7 @@ class SudokuGenerator:
 
     # Returns a 2D python list of numbers, which represents the board
     def get_board(self):
-        return self.board
+        return [[cell.value for cell in row] for row in self.board]
 
     # Displays the board to the console
     def print_board(self):
