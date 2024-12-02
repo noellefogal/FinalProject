@@ -12,22 +12,27 @@ class Board:
     self.difficulty = difficulty
 
   def draw(self, screen):
-    for i in range(9):
-      pygame.draw.line(screen, BLACK, (0, i*CELL_SIZE), (BOARD_SIZE, i*CELL_SIZE))
+    for i in range(10):
+      if i%3 == 0:
+        pygame.draw.line(screen, BLACK, (0, i * CELL_SIZE), (BOARD_SIZE, i * CELL_SIZE), 5)
+        pygame.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, BOARD_SIZE), 5)
+      pygame.draw.line(screen, BLACK, (0, i*CELL_SIZE), (BOARD_SIZE, i*CELL_SIZE), 1)
+      pygame.draw.line(screen, BLACK, (i*CELL_SIZE, 0), (i*CELL_SIZE, BOARD_SIZE), 1)
+
 
 
 
 
 #part 2
-  #def clear(self):
-   # self.value = 0
-  #  self.sketch = 0
- # def sketch(self,value):
-   # self.sketched_value = value
- # def place_number(self,value):
-  #  self.value = value
-   # self.sketch = 0
-  #def reset_to_original(self):
-   # self.value = original_value
-   # self.sketch = 0
+  def clear(self):
+    self.value = 0
+    self.sketch = 0
+  def sketch(self,value):
+    self.sketched_value = value
+  def place_number(self,value):
+    self.value = value
+    self.sketch = 0
+  def reset_to_original(self):
+    self.value = original_value
+    self.sketch = 0
   
