@@ -2,8 +2,6 @@
 from constants import *
 import pygame
 
-
-
 class Board:
   def __init__(self, width, height, screen, difficulty = "EASY"):
     self.width = width
@@ -19,9 +17,15 @@ class Board:
       pygame.draw.line(screen, BLACK, (0, i*CELL_SIZE), (BOARD_SIZE, i*CELL_SIZE), 1)
       pygame.draw.line(screen, BLACK, (i*CELL_SIZE, 0), (i*CELL_SIZE, BOARD_SIZE), 1)
 
+  def select(self, row, col):
+    self.slctd_cell = (row, col)
+    return self.slctd_cell
 
-
-
+  def click(self, row, col):
+    if row < BOARD_SIZE and col<BOARD_SIZE:
+      return (row//CELL_SIZE, col//CELL_SIZE)
+    else:
+      return None
 
 #part 2
   def clear(self):
