@@ -30,8 +30,18 @@ class SudokuGenerator:
     def valid_in_col(self,col,num):
         for row in range(self.row_length):
             if self.board[row][col] == num:
-                return False
+		    return False
         return True
+	    
+    def valid_in_box(self, row_start, col_start, num):
+	for row in range(row_start, row_start + 3):
+		for col in range(col_start, col_start +3):
+			if self.board[row][col] == num:
+				return False
+	return True
+			
+		
+	
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board
