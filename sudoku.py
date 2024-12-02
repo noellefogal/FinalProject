@@ -6,7 +6,7 @@ def main():
     try:
         pygame.init()
         screen = pygame.display.set_mode((BOARD_SIZE, BOARD_SIZE))
-        screen.fill("white")
+        screen.fill(WHITE)
         clock = pygame.time.Clock()
         running = True
         while running:
