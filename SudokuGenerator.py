@@ -24,33 +24,14 @@ class SudokuGenerator:
                 print(cell, end=" ")
             print()
 
-    '''
-	Determines if num is contained in the specified row (horizontal) of the board
-    If num is already in the specified row, return False. Otherwise, return True
+    def valid_in_row(self,row,num):
+        return num if not self.board[row]
 
-	Parameters:
-	row is the index of the row we are checking
-	num is the value we are looking for in the row
-
-	Return: boolean
-    '''
-
-    def valid_in_row(self, row, num):
-        pass
-
-    '''
-	Determines if num is contained in the specified column (vertical) of the board
-    If num is already in the specified col, return False. Otherwise, return True
-
-	Parameters:
-	col is the index of the column we are checking
-	num is the value we are looking for in the column
-
-	Return: boolean
-    '''
-
-    def valid_in_col(self, col, num):
-        pass
+    def valid_in_col(self,col,num):
+        for row in range(self.row_length):
+            if self.board[row][col] == num:
+                return False
+        return True
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board

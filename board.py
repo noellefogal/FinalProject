@@ -1,1 +1,42 @@
-#create the board here
+#part 1
+from constants import *
+import pygame
+
+class Board:
+  def __init__(self, width, height, screen, difficulty = "EASY"):
+    self.width = width
+    self.height = height
+    self.screen = screen
+    self.difficulty = difficulty
+
+  def draw(self, screen):
+    for i in range(10):
+      if i%3 == 0:
+        pygame.draw.line(screen, BLACK, (0, i * CELL_SIZE), (BOARD_SIZE, i * CELL_SIZE), 5)
+        pygame.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, BOARD_SIZE), 5)
+      pygame.draw.line(screen, BLACK, (0, i*CELL_SIZE), (BOARD_SIZE, i*CELL_SIZE), 1)
+      pygame.draw.line(screen, BLACK, (i*CELL_SIZE, 0), (i*CELL_SIZE, BOARD_SIZE), 1)
+
+  def select(self, row, col):
+    self.slctd_cell = (row, col)
+    return self.slctd_cell
+
+  def click(self, row, col):
+    if row < BOARD_SIZE and col<BOARD_SIZE:
+      return (row//CELL_SIZE, col//CELL_SIZE)
+    else:
+      return None
+
+#part 2
+  def clear(self):
+    self.value = 0
+    self.sketch = 0
+  def sketch(self,value):
+    self.sketched_value = value
+  def place_number(self,value):
+    self.value = value
+    self.sketch = 0
+  def reset_to_original(self):
+    self.value = original_value
+    self.sketch = 0
+  
