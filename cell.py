@@ -29,11 +29,9 @@ class Cell:
 
         font = pygame.font.Font(None, FONT_SIZE)
 
-        # Draw cell outline (red if selected otherwise black)
+        # Draw highlight if selected
         if self.selected:
             pygame.draw.rect(self.screen, RED, cell_rect, SLCTD_LINE_WIDTH)
-        else:
-            pygame.draw.rect(self.screen, BLACK, cell_rect, CELL_LINE_WIDTH)
 
         # Draw permanent value
         if self.value != 0:
