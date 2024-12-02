@@ -135,7 +135,14 @@ class SudokuGenerator:
     '''
 
     def remove_cells(self):
-        pass
+    	cells_to_set = []
+    	for x in range(num_cells):
+        	row = random.randint(0, 8)
+        	col = random.randint(0, 8)
+        	cells_to_set.append((row, col))
+
+    	for cell_coords in cells_to_set:
+        	sudoku[cell_coords] =
 
 
 '''
