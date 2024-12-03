@@ -48,5 +48,16 @@ class Board:
         if cell.is_mutable:
           cell.set_cell_value(0)
           cell.set_sketched_value(0)
-    
+#part 3
+  def is_full(self):
+    pass
+
+  def update_board(self):
+    pass
+
+  def find_empty(self):
+    pass
+
+  def check_board(self):
+    pass
   
