@@ -138,7 +138,7 @@ class SudokuGenerator:
     def remove_cells(self): #Ihfaz: creates a list to store the random board cells that this function is gonna remove then use those indexes on the board list to be removed (set to 0) for the sudoku game to run
     	cells_to_remove = [] 
 
-	if Board.difficulty == "easy": # 30 cells empty or removed for easy
+	if Board.difficulty.lower() == "easy": # 30 cells empty or removed for easy
     		for x in range(30+1):
         		row = random.randint(0, 10)
         		col = random.randint(0, 10)
@@ -149,7 +149,7 @@ class SudokuGenerator:
 				else:
         				cells_to_remove.append((row, col))
 				
-	elif Board.difficulty == "medium": # 40 cells empty or removed for medium
+	elif Board.difficulty.lower() == "medium": # 40 cells empty or removed for medium
     		for x in range(40+1):
         		row = random.randint(0, 10)
         		col = random.randint(0, 10)
@@ -160,7 +160,7 @@ class SudokuGenerator:
 				else:
         				cells_to_remove.append((row, col))
 					
-	elif Board.difficulty == "hard": # 50 cells empty or removed for hard
+	elif Board.difficulty.lower() == "hard": # 50 cells empty or removed for hard
     		for x in range(50+1):
         		row = random.randint(0, 10)
         		col = random.randint(0, 10)
