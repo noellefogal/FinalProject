@@ -1,5 +1,3 @@
-import pygame
-from constants import *
 from board import *
 
 def main():
