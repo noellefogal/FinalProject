@@ -72,7 +72,9 @@ class SudokuGenerator:
     '''
 
     def fill_diagonal(self):
-        pass
+        for i in range(0,self.row_length,3):
+            self.fill_box(i,i)
+
 
     '''
     DO NOT CHANGE
@@ -205,6 +207,6 @@ def generate_sudoku(size, removed):
     board = sudoku.get_board()
     return board
 
-#sudokugenerator = SudokuGenerator(9, 50)
-#sudokugenerator.fill_box(3, 3)
-#print(sudokugenerator.board)
+sudokugenerator = SudokuGenerator(9, 0)
+sudokugenerator.fill_diagonal()
+print(sudokugenerator.board)
