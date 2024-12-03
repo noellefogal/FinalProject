@@ -1,5 +1,5 @@
 #part 1
-from constants import *
+from cell import *
 import pygame
 
 class Board:
