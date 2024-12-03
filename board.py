@@ -49,14 +49,22 @@ class Board:
           cell.set_cell_value(0)
           cell.set_sketched_value(0)
 #part 3
-  def is_full(self):
-    pass
+  def is_full(self): #checks if the board is full of values 1-9
+    for row in self.board:
+      for cell in row:
+        if board[row][cell] == 0
+          return False
+    return True
 
   def update_board(self):
     pass
 
   def find_empty(self):
-    pass
+    for row in self.board:
+      for cell in row:
+        if board[row][cell] == 0
+          x,y = row,cell
+          return (x,y)
 
   def check_board(self):
     pass
