@@ -111,7 +111,7 @@ class SudokuGenerator:
         for num in range(1, self.row_length+ 1):
             if self.is_valid(row, col, num):
                 self.board[row][col] = num
-                if row <2 and col < and self.fill_remaining(row, col + 1):
+                if self.fill_remaining(row, col + 1):
                     return True
                 self.board[row][col] = 0
         return False
