@@ -108,10 +108,10 @@ class SudokuGenerator:
                 if row >= self.row_length:
                     return True
 
-        for num in range(1, self.row_length + 1):
+        for num in range(1, self.row_length+ 1):
             if self.is_valid(row, col, num):
                 self.board[row][col] = num
-                if self.fill_remaining(row, col + 1):
+                if row <2 and col < and self.fill_remaining(row, col + 1):
                     return True
                 self.board[row][col] = 0
         return False
@@ -206,7 +206,3 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
-
-sudokugenerator = SudokuGenerator(9, 0)
-sudokugenerator.fill_diagonal()
-print(sudokugenerator.board)
