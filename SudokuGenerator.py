@@ -12,7 +12,7 @@ class SudokuGenerator:
             [0 for col in range(self.row_length)]
             for row in range(self.row_length)
         ]
-        self.box_length = math.sqrt(row_length)
+        self.box_length = int(math.sqrt(row_length))
 
     # Returns a 2D python list of numbers, which represents the board
     def get_board(self):
@@ -56,7 +56,12 @@ class SudokuGenerator:
     '''
 
     def fill_box(self, row_start, col_start):
-        pass
+        for i in range(self.box_length):
+            for j in range(self.box_length):
+                random_value = random.randint(1, 9)
+                while not self.is_valid(row_start, col_start, random_value):
+                    random_value = random.randint(1, 9)
+                self.board[row_start + i][col_start + j] = random_value
 
     '''
     Fills the three boxes along the main diagonal of the board
@@ -199,3 +204,7 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
+
+#sudokugenerator = SudokuGenerator(9, 50)
+#sudokugenerator.fill_box(3, 3)
+#print(sudokugenerator.board)
