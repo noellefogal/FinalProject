@@ -90,7 +90,7 @@ class SudokuGenerator:
     '''
 
     def fill_remaining(self, row, col):
-        if (col >= self.row_length and row < self.row_length - 1):
+        if col >= self.row_length and row < self.row_length - 1:
             row += 1
             col = 0
         if row >= self.row_length and col >= self.row_length:
@@ -145,11 +145,11 @@ class SudokuGenerator:
     def remove_cells(
             self):  # Ihfaz: creates a list to store the random board cells that this function is gonna remove then use those indexes on the board list to be removed (set to 0) for the sudoku game to run
         cells_to_remove = []
+        row = random.randint(0, 10)
+        col = random.randint(0, 10)
 
         if Board.difficulty.lower() == "easy":  # 30 cells empty or removed for easy
             for x in range(30 + 1):
-                row = random.randint(0, 10)
-                col = random.randint(0, 10)
                 for cell_row, cell_col in cells_to_remove:
                     if cell_row == row and cell_col == col:  # if the random index is already there, a new one is generated
                         row = random.randint(0, 10)
@@ -159,8 +159,6 @@ class SudokuGenerator:
 
         elif Board.difficulty.lower() == "medium":  # 40 cells empty or removed for medium
             for x in range(40 + 1):
-                row = random.randint(0, 10)
-                col = random.randint(0, 10)
                 for cell_row, cell_col in cells_to_remove:
                     if cell_row == row and cell_col == col:  # if the random index is already there, a new one is generated
                         row = random.randint(0, 10)
@@ -170,8 +168,6 @@ class SudokuGenerator:
 
         elif Board.difficulty.lower() == "hard":  # 50 cells empty or removed for hard
             for x in range(50 + 1):
-                row = random.randint(0, 10)
-                col = random.randint(0, 10)
                 for cell_row, cell_col in cells_to_remove:
                     if cell_row == row and cell_col == col:  # if the random index is already there, a new one is generated
                         row = random.randint(0, 10)
