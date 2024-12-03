@@ -52,7 +52,7 @@ class Board:
   def is_full(self): #checks if the board is full of values 1-9
     for row in self.board:
       for cell in row:
-        if board[row][cell] == 0
+        if self.board[row][cell] == 0:
           return False
     return True
 
@@ -62,7 +62,7 @@ class Board:
   def find_empty(self):
     for row in self.board:
       for cell in row:
-        if board[row][cell] == 0
+        if self.board[row][cell] == 0:
           x,y = row,cell
           return (x,y)
 
