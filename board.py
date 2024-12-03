@@ -56,8 +56,11 @@ class Board:
           return False
     return True
 
-  def update_board(self):
-    pass
+  def update_board(self): #updates the 2D board array with the user-sketched in values of each cell
+    for row in self.board:
+      for col in row:
+        self.cell.select(row, col)
+        self.board[row][col] = self.cell.value
 
   def find_empty(self):
     for row in self.board:
