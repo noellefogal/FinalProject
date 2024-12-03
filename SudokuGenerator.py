@@ -1,5 +1,5 @@
 import math, random
-import Board
+from board import *
 
 # This class generates a Sudoku – the puzzle as well as the solution
 class SudokuGenerator:
@@ -31,15 +31,15 @@ class SudokuGenerator:
     def valid_in_col(self,col,num):
         for row in range(self.row_length):
             if self.board[row][col] == num:
-		    return False
+                return False
         return True
 	    
     def valid_in_box(self, row_start, col_start, num):
-	for row in range(row_start, row_start + 3):
-		for col in range(col_start, col_start +3):
-			if self.board[row][col] == num:
-				return False
-	return True
+        for row in range(row_start, row_start + 3):
+            for col in range(col_start, col_start +3):
+                if self.board[row][col] == num:
+                    return False
+        return True
 
     def is_valid(self, row, col, num):
         return self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row, col, num)
@@ -135,45 +135,45 @@ class SudokuGenerator:
 	Return: None
     '''
 
-    def remove_cells(self): #Ihfaz: creates a list to store the random board cells that this function is gonna remove then use those indexes on the board list to be removed (set to 0) for the sudoku game to run
-    	cells_to_remove = [] 
+    def remove_cells(
+            self):  # Ihfaz: creates a list to store the random board cells that this function is gonna remove then use those indexes on the board list to be removed (set to 0) for the sudoku game to run
+        cells_to_remove = []
 
-	if Board.difficulty.lower() == "easy": # 30 cells empty or removed for easy
-    		for x in range(30+1):
-        		row = random.randint(0, 10)
-        		col = random.randint(0, 10)
-			for cell_row,cell_col in cells_to_remove:
-				if cell_row, cell_col == row, col #if the random index is already there, a new one is generated
-					row = random.randint(0, 10)
-        				col = random.randint(0, 10)
-				else:
-        				cells_to_remove.append((row, col))
-				
-	elif Board.difficulty.lower() == "medium": # 40 cells empty or removed for medium
-    		for x in range(40+1):
-        		row = random.randint(0, 10)
-        		col = random.randint(0, 10)
-			for cell_row,cell_col in cells_to_remove:
-				if cell_row, cell_col == row, col #if the random index is already there, a new one is generated
-					row = random.randint(0, 10)
-        				col = random.randint(0, 10)
-				else:
-        				cells_to_remove.append((row, col))
-					
-	elif Board.difficulty.lower() == "hard": # 50 cells empty or removed for hard
-    		for x in range(50+1):
-        		row = random.randint(0, 10)
-        		col = random.randint(0, 10)
-			for cell_row,cell_col in cells_to_remove:
-				if cell_row, cell_col == row, col #if the random index is already there, a new one is generated
-					row = random.randint(0, 10)
-        				col = random.randint(0, 10)
-				else:
-        				cells_to_remove.append((row, col))
-					
-    	for cell_coords in cells_to_remove: #the board indexes that match with the indexes in the list that removes cells
-        	board[cell_coords] = 0
+        if Board.difficulty.lower() == "easy":  # 30 cells empty or removed for easy
+            for x in range(30 + 1):
+                row = random.randint(0, 10)
+                col = random.randint(0, 10)
+                for cell_row, cell_col in cells_to_remove:
+                    if cell_row == row and cell_col == col:  # if the random index is already there, a new one is generated
+                        row = random.randint(0, 10)
+                        col = random.randint(0, 10)
+                    else:
+                        cells_to_remove.append((row, col))
 
+        elif Board.difficulty.lower() == "medium":  # 40 cells empty or removed for medium
+            for x in range(40 + 1):
+                row = random.randint(0, 10)
+                col = random.randint(0, 10)
+                for cell_row, cell_col in cells_to_remove:
+                    if cell_row == row and cell_col == col:  # if the random index is already there, a new one is generated
+                        row = random.randint(0, 10)
+                        col = random.randint(0, 10)
+                    else:
+                        cells_to_remove.append((row, col))
+
+        elif Board.difficulty.lower() == "hard":  # 50 cells empty or removed for hard
+            for x in range(50 + 1):
+                row = random.randint(0, 10)
+                col = random.randint(0, 10)
+                for cell_row, cell_col in cells_to_remove:
+                    if cell_row == row and cell_col == col:  # if the random index is already there, a new one is generated
+                        row = random.randint(0, 10)
+                        col = random.randint(0, 10)
+                    else:
+                        cells_to_remove.append((row, col))
+
+        for cell_coords in cells_to_remove:  # the board indexes that match with the indexes in the list that removes cells
+            self.board[cell_coords] = 0
 
 '''
 DO NOT CHANGE
