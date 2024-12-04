@@ -29,18 +29,29 @@ class Board:
 
 #part 2
   def clear(self):
-    if cell.is_mutable:
-        cell.set_cell_value(0)
-        cell.set_sketched_value(0)
+    if self.slctd_cell:
+      row,col = self.slctd_cell
+      cell = self.board[row][col]
+      if cell.is_mutable:
+          cell.set_cell_value(0)
+          cell.set_sketched_value(0)
     else:
       pass
       
   def sketch(self,value):
-    self.sketched_value = value
+    if self.slctd_cell:
+      row, col = self.slctd_cell
+      cell = self.board[row][col]
+      cell.set_sketched_value(value)
     
   def place_number(self,value):
-    self.value = value
-    self.sketch = 0
+    if self.slctd_cell:
+            row, col = self.slctd_cell
+            cell = self.board[row][col]
+            cell.set_cell_value(value)
+            cell.set_sketched_value(0)
+            cell.selected = False
+            self.slctd_cell = None
     
   def reset_to_original(self):
     for row in self.board:
