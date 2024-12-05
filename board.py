@@ -29,18 +29,29 @@ class Board:
 
 #part 2
   def clear(self):
-    if cell.is_mutable:
-        cell.set_cell_value(0)
-        cell.set_sketched_value(0)
+    if self.slctd_cell:
+      row,col = self.slctd_cell
+      cell = self.board[row][col]
+      if cell.is_mutable:
+          cell.set_cell_value(0)
+          cell.set_sketched_value(0)
     else:
       pass
       
   def sketch(self,value):
-    self.sketched_value = value
+    if self.slctd_cell:
+      row, col = self.slctd_cell
+      cell = self.board[row][col]
+      cell.set_sketched_value(value)
     
   def place_number(self,value):
-    self.value = value
-    self.sketch = 0
+    if self.slctd_cell:
+            row, col = self.slctd_cell
+            cell = self.board[row][col]
+            cell.set_cell_value(value)
+            cell.set_sketched_value(0)
+            cell.selected = False
+            self.slctd_cell = None
     
   def reset_to_original(self):
     for row in self.board:
@@ -49,14 +60,25 @@ class Board:
           cell.set_cell_value(0)
           cell.set_sketched_value(0)
 #part 3
-  def is_full(self):
-    pass
+  def is_full(self): #checks if the board is full of values 1-9
+    for row in self.board:
+      for cell in row:
+        if self.board[row][cell] == 0:
+          return False
+    return True
 
-  def update_board(self):
-    pass
+  def update_board(self): #updates the 2D board array with the user-sketched in values of each cell
+    for row in self.board:
+      for col in row:
+        self.cell.select(row, col)
+        self.board[row][col] = self.cell.value
 
   def find_empty(self):
-    pass
+    for row in self.board:
+      for cell in row:
+        if self.board[row][cell] == 0:
+          x,y = row,cell
+          return (x,y)
 
   def check_board(self):
     pass
