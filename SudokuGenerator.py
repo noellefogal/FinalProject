@@ -165,16 +165,16 @@ def generate_sudoku(size, removed):
 DELETE test_sudoku() BEFORE FINAL PUBLICATION !
 uncomment to test
 '''
-# def test_sudoku():
-#     sudoku1 = SudokuGenerator(9, 20)
+#def test_sudoku():
+#    sudoku1 = SudokuGenerator(9, 20)
 #
-#     sudoku1.fill_values()
-#     print("Sudoku Board After Filling:")
-#     sudoku1.print_board()
+#    sudoku1.fill_values()
+#    print("Sudoku Board After Filling:")
+#    sudoku1.print_board()
 #
-#     sudoku1.remove_cells()
-#     print("\nSudoku Board After Removing Cells:")
-#     sudoku1.print_board()
+#    sudoku1.remove_cells()
+#    print("\nSudoku Board After Removing Cells:")
+#    sudoku1.print_board()
 #
-# if __name__ == "__main__":
-#     test_sudoku()
+#if __name__ == "__main__":
+#    test_sudoku()
