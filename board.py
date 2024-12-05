@@ -97,8 +97,8 @@ class Board:
           return (x,y)
 
   def check_board(self):
-    for row in self.current_board:
-      for col in row:
+    for row in range(len(self.current_board)):
+      for col in range(len(self.current_board[row])):
         if self.current_board[row[col] != self.solved_board[row][col]:
           return False
     return True
