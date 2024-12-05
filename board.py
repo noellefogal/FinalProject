@@ -1,5 +1,6 @@
-#part 1
 from cell import *
+from SudokuGenerator import *
+from constants import *
 import pygame
 
 class Board:
@@ -7,7 +8,28 @@ class Board:
     self.width = width
     self.height = height
     self.screen = screen
-    self.difficulty = difficulty
+    self.difficulty = difficulty.upper()
+    self.slctd_cell = None
+
+    difficulty_map = {
+      'EASY': 20,
+      'MEDIUM': 40,
+      'HARD': 60
+    }
+    removed_cells = difficulty_map.get(self.difficulty, 20)
+    puzzle, solution = generate_sudoku(9, removed_cells)
+
+    self.initial_board = puzzle
+    self.solved_board = solution
+    self.current_board = [
+      [0 for _ in range(9)]
+      for _ in range(9)
+    ]
+
+    self.cells = [
+      [Cell(self.initial_board[row][col], row, col, screen) for col in range(9)]
+      for row in range(9)
+    ]
 
   def draw(self, screen):
     for i in range(10):
@@ -16,10 +38,15 @@ class Board:
         pygame.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, BOARD_SIZE), 5)
       pygame.draw.line(screen, BLACK, (0, i*CELL_SIZE), (BOARD_SIZE, i*CELL_SIZE), 1)
       pygame.draw.line(screen, BLACK, (i*CELL_SIZE, 0), (i*CELL_SIZE, BOARD_SIZE), 1)
+    for row in self.cells:
+      for cell in row:
+        cell.draw()
 
   def select(self, row, col):
-    self.slctd_cell = (row, col)
-    return self.slctd_cell
+    if self.slctd_cell is not None:
+      self.slctd_cell.selected = False
+    self.slctd_cell = self.cells[row][col]
+    self.slctd_cell.selected = True
 
   def click(self, row, col):
     if row < BOARD_SIZE and col<BOARD_SIZE:
@@ -29,57 +56,45 @@ class Board:
 
 #part 2
   def clear(self):
-    if self.slctd_cell:
-      row,col = self.slctd_cell
-      cell = self.board[row][col]
-      if cell.is_mutable:
-          cell.set_cell_value(0)
-          cell.set_sketched_value(0)
-    else:
-      pass
+    if self.slctd_cell is not None and self.initial_board[self.slctd_cell.row][self.slctd_cell.col] == 0:
+      self.slctd_cell.set_sketched_value(0)
+      self.slctd_cell.set_cell_value(0)
       
   def sketch(self,value):
-    if self.slctd_cell:
-      row, col = self.slctd_cell
-      cell = self.board[row][col]
-      cell.set_sketched_value(value)
+    if self.slctd_cell is not None:
+      self.slctd_cell.set_sketched_value(value)
     
   def place_number(self,value):
-    if self.slctd_cell:
-            row, col = self.slctd_cell
-            cell = self.board[row][col]
-            cell.set_cell_value(value)
-            cell.set_sketched_value(0)
-            cell.selected = False
-            self.slctd_cell = None
+    if self.slctd_cell is not None:
+      self.clear()
+      self.slctd_cell.set_cell_value(value)
+      self.slctd_cell.selected = False
+      self.slctd_cell = None
     
   def reset_to_original(self):
-    for row in self.board:
-      for cell in row:
-        if cell.is_mutable:
-          cell.set_cell_value(0)
-          cell.set_sketched_value(0)
+    for row in range(len(self.cells)):
+      for cell in range(len(self.cells[row])):
+        self.cells[row][cell].set_cell_value(self.initial_board[row][cell])
+        self.cells[row][cell].set_sketched_value(0)
 #part 3
   def is_full(self): #checks if the board is full of values 1-9
-    for row in self.board:
+    for row in self.current_board:
       for cell in row:
-        if self.board[row][cell] == 0:
+        if cell == 0:
           return False
     return True
 
   def update_board(self): #updates the 2D board array with the user-sketched in values of each cell
-    for row in self.board:
-      for col in row:
-        self.cell.select(row, col)
-        self.board[row][col] = self.cell.value
+    for row in range(len(self.current_board)):
+      for col in range(len(self.current_board[row])):
+        self.current_board[row][col] = self.cells[row][col].value
 
   def find_empty(self):
-    for row in self.board:
-      for cell in row:
-        if self.board[row][cell] == 0:
+    for row in range(len(self.current_board)):
+      for cell in range(len(self.current_board[row])):
+        if self.current_board[row][cell] == 0:
           x,y = row,cell
           return (x,y)
 
   def check_board(self):
     pass
-  
