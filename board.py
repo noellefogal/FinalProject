@@ -12,11 +12,11 @@ class Board:
     self.slctd_cell = None
 
     difficulty_map = {
-      'EASY': 20,
+      'EASY': 30,
       'MEDIUM': 40,
       'HARD': 60
     }
-    removed_cells = difficulty_map.get(self.difficulty, 20)
+    removed_cells = difficulty_map.get(self.difficulty, 30)
     puzzle, solution = generate_sudoku(9, removed_cells)
 
     self.initial_board = puzzle
