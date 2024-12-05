@@ -101,4 +101,4 @@ class Board:
       for col in row:
         if self.current_board[row[col] != self.solved_board[row][col]:
           return False
-      return True
+    return True
