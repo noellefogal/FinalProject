@@ -73,7 +73,7 @@ class Board:
       self.slctd_cell.draw()
     
   def place_number(self,value):
-    if self.slctd_cell is not None:
+    if self.slctd_cell is not None and self.initial_board[self.slctd_cell.row][self.slctd_cell.col] == 0:
       self.clear()
       self.slctd_cell.set_cell_value(value)
       self.slctd_cell.draw()
@@ -111,6 +111,4 @@ class Board:
         if self.current_board[row][col] != self.solved_board[row][col]:
           return False
     return True
-
-
 
