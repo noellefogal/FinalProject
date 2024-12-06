@@ -1,9 +1,6 @@
-from FinalProject.SudokuGenerator import SudokuGenerator
 from board import *
-from cell import *
-from SudokuGenerator import *
 from constants import *
-import pygame, sys
+import pygame
 
 
 

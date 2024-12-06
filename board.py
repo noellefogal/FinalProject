@@ -4,7 +4,7 @@ from constants import *
 import pygame
 
 class Board:
-  def __init__(self, width, height, screen, difficulty = "EASY"):
+  def __init__(self, width, height, screen, difficulty):
     self.width = width
     self.height = height
     self.screen = screen
@@ -15,7 +15,7 @@ class Board:
     difficulty_map = {
       'EASY': 30,
       'MEDIUM': 40,
-      'HARD': 60
+      'HARD': 50
     }
     removed_cells = difficulty_map.get(self.difficulty, 30)
     puzzle, solution = generate_sudoku(9, removed_cells)
@@ -51,11 +51,12 @@ class Board:
       self.slctd_cell.selected = False
     self.slctd_cell = self.cells[row][col]
     self.slctd_cell.selected = True
+    self.slctd_cell.draw()
 
 
   def click(self, row, col):
     if row < BOARD_SIZE and col<BOARD_SIZE:
-      return (row//CELL_SIZE, col//CELL_SIZE)
+      return row//CELL_SIZE, col//CELL_SIZE
     else:
       return None
 
@@ -69,6 +70,7 @@ class Board:
   def sketch(self,value):
     if self.slctd_cell is not None:
       self.slctd_cell.set_sketched_value(value)
+      self.slctd_cell.draw()
     
   def place_number(self,value):
     if self.slctd_cell is not None:
@@ -101,7 +103,7 @@ class Board:
       for cell in range(len(self.current_board[row])):
         if self.current_board[row][cell] == 0:
           x,y = row,cell
-          return (x,y)
+          return x,y
 
   def check_board(self):
     for row in range(len(self.current_board)):
