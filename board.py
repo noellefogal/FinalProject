@@ -74,6 +74,7 @@ class Board:
     if self.slctd_cell is not None:
       self.clear()
       self.slctd_cell.set_cell_value(value)
+      self.slctd_cell.draw()
       self.slctd_cell.selected = False
       self.slctd_cell = None
     
