@@ -10,6 +10,7 @@ class Board:
     self.screen = screen
     self.difficulty = difficulty.upper()
     self.slctd_cell = None
+    self.creating_board = True
 
     difficulty_map = {
       'EASY': 30,
@@ -38,15 +39,19 @@ class Board:
         pygame.draw.line(screen, BLACK, (i * CELL_SIZE, 0), (i * CELL_SIZE, BOARD_SIZE), 5)
       pygame.draw.line(screen, BLACK, (0, i*CELL_SIZE), (BOARD_SIZE, i*CELL_SIZE), 1)
       pygame.draw.line(screen, BLACK, (i*CELL_SIZE, 0), (i*CELL_SIZE, BOARD_SIZE), 1)
-    for row in self.cells:
-      for cell in row:
-        cell.draw()
+    if self.creating_board:
+      for row in self.cells:
+        for cell in row:
+          cell.draw()
+    self.creating_board = False
+
 
   def select(self, row, col):
     if self.slctd_cell is not None:
       self.slctd_cell.selected = False
     self.slctd_cell = self.cells[row][col]
     self.slctd_cell.selected = True
+
 
   def click(self, row, col):
     if row < BOARD_SIZE and col<BOARD_SIZE:
@@ -99,6 +104,9 @@ class Board:
   def check_board(self):
     for row in range(len(self.current_board)):
       for col in range(len(self.current_board[row])):
-        if self.current_board[row[col] != self.solved_board[row][col]:
+        if self.current_board[row][col] != self.solved_board[row][col]:
           return False
     return True
+
+
+
