@@ -8,16 +8,24 @@ def main():
         first_click = True
         screen = pygame.display.set_mode((BOARD_SIZE, BOARD_SIZE))
         screen.fill(WHITE)
-        board = Board(BOARD_SIZE, BOARD_SIZE, screen, "HARD")
+        board = Board(BOARD_SIZE, BOARD_SIZE, screen, "EASY")
         board.draw(screen)
         clock = pygame.time.Clock()
         running = True
         x = 0
         y = 0
+        over = False
 
         while running:
             pygame.display.flip()
             clock.tick(60)
+            if not over:
+                if board.is_full():
+                    if board.check_board():
+                        print("YOU WIN")
+                    if not board.check_board():
+                        print("YOU LOSE")
+                    over = True
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -63,10 +71,6 @@ def main():
                     if event.key == pygame.K_RETURN:
                         board.place_number(board.slctd_cell.sketched_value)
                         board.update_board()
-
-
-
-
 
 
 if __name__ == "__main__":
