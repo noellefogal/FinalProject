@@ -63,7 +63,8 @@ class Board:
   def clear(self):
     if self.slctd_cell is not None and self.initial_board[self.slctd_cell.row][self.slctd_cell.col] == 0:
       self.slctd_cell.set_sketched_value(0)
-      self.slctd_cell.set_cell_value(0)
+      self.slctd_cell.draw()
+
       
   def sketch(self,value):
     if self.slctd_cell is not None:
